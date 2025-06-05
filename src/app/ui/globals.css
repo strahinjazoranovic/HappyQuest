@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --font-sans: 'Lexend', system-ui;
+  --font-weight: 400;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html, body {
+  background: var(--background) !important;
+  font-family: var(--font-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: white;
+    --foreground: black;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body.dark,
+html.dark {
+  --background: #18181b;
+  --foreground: #f4f4f5;
+}
+
+body,
+html {
+  background: var(--background, #fff);
+  color: var(--foreground, #000);
+  transition: background 0.0s, color 0.0s;
+}
+
+/* Example for cards and containers */
+.dark .bg-white {
+  background-color: #23232b !important;
+}
+.dark .text-blue-300 {
+  color: #7dd3fc !important;
+}
+.dark .border-zinc-400 {
+  border-color: #52525b !important;
+}
+.dark .text-gray-500 {
+  color: #a1a1aa !important;
+}
