@@ -271,13 +271,16 @@ export default function TaskPage() {
       <Sidebar />
       {showDeleteModal && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-grey bg-opacity-50 backdrop-blur-sm px-2">
-          <div className="bg-white border border-zinc-300 rounded-xl p-5 m-5 shadow-2xl flex flex-col items-center w-full max-w-md">
+          <div className="backdrop-blur-md rounded-xl p-6 shadow-2xl flex flex-col items-center w-full max-w-md">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center">
+              Delete basic task
+            </h2>
             <div className="mb-4 font-bold text-sm text-center ">
               Are you sure you want to delete this task?
             </div>
             <div className="flex gap-4 justify-center">
               <button
-                className="btn bg-green-600 text-white"
+                className="btn bg-red-500 text-white"
                 onClick={async () => {
                   if (deleteId !== null) {
                     await handleDeleteTask(deleteId);
@@ -291,7 +294,7 @@ export default function TaskPage() {
                 Yes, delete task
               </button>
               <button
-                className="btn bg-red-500 text-white"
+                className="btn text-white"
                 onClick={() => {
                   setShowDeleteModal(false);
                   setDeleteId(null);

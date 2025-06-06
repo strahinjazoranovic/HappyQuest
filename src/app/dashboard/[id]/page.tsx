@@ -374,7 +374,7 @@ export default function ParentTaskPage() {
                         Select an existing task
                       </option>
                       {allTasks.map((task) => (
-                        <option key={task.id} value={task.id}>
+                        <option key={task.id} value={task.id} className="text-black" >
                           {task.name} ({task.points} pts)
                         </option>
                       ))}
@@ -406,7 +406,7 @@ export default function ParentTaskPage() {
                             u.type.toLowerCase() === "children")
                       )
                       .map((user) => (
-                        <option key={user.id} value={user.id.toString()}>
+                        <option key={user.id} className="text-black" value={user.id.toString()}>
                           {user.name}
                         </option>
                       ))}

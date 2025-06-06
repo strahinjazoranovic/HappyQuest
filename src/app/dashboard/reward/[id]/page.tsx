@@ -272,14 +272,17 @@ export default function RewardsPage() {
       </div>
       <Sidebar />
       {showDeleteModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-30 px-2">
-          <div className="bg-white/90 backdrop-blur-md border border-zinc-300 rounded-xl p-6 shadow-2xl flex flex-col items-center w-full max-w-md">
-            <div className="mb-4 font-bold text-xl text-center text-zinc-800">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-grey bg-opacity-50 backdrop-blur-sm px-2">
+          <div className="backdrop-blur-md rounded-xl p-6 shadow-2xl flex flex-col items-center w-full max-w-md">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center">
+              Delete reward
+            </h2>
+            <div className="mb-4 text-center">
               Are you sure you want to delete this reward?
             </div>
             <div className="flex gap-4 justify-center">
               <button
-                className="btn bg-green-600 text-white"
+                className="btn bg-red-500 text-white"
                 onClick={async () => {
                   if (deleteId !== null) {
                     await handleDeleteReward(deleteId);
@@ -293,7 +296,7 @@ export default function RewardsPage() {
                 Yes, delete reward
               </button>
               <button
-                className="btn bg-red-500 text-white"
+                className="btn text-white"
                 onClick={() => {
                   setShowDeleteModal(false);
                   setDeleteId(null);

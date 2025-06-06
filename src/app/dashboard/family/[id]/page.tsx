@@ -79,7 +79,7 @@ export default function FamilyPointsPage() {
         <main className="flex flex-col items-center justify-center w-full px-2 sm:px-8 py-4 gap-6">
           <form
             onSubmit={handleGivePoints}
-            className="rounded-2xl shadow-2xl border border-zinc-400 p-4 sm:p-8 flex flex-col gap-6 w-full max-w-md bg-white"
+            className="rounded-2xl shadow-2xl border border-zinc-400 p-4 sm:p-8 flex flex-col gap-6 w-full max-w-md"
           >
             <label className="font-semibold text-lg">
               Select Child:
@@ -93,7 +93,7 @@ export default function FamilyPointsPage() {
                   Choose a child
                 </option>
                 {children.map((child) => (
-                  <option key={child.id} value={child.id}>
+                  <option key={child.id} value={child.id} className="text-black">
                     {child.name}
                   </option>
                 ))}

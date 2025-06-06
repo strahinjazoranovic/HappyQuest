@@ -14,7 +14,7 @@ const Sidebar = () => {
   const pathname =
     typeof window !== "undefined" ? window.location.pathname : "";
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Start as loading
   const [open, setOpen] = useState(false);
 
   // Fetch user data for the sidebar
@@ -26,6 +26,8 @@ const Sidebar = () => {
         setUsers(data.users);
       } catch (error) {
         console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -66,7 +68,6 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Fixed Hamburger Icon (top left, always visible, above content) */}
       <button
         className="md:hidden fixed top-4 left-4 z-[100] bg-blue-300 p-2 rounded shadow-lg"
         onClick={() => setOpen((o) => !o)}
@@ -103,14 +104,28 @@ const Sidebar = () => {
         <div className="px-6 py-6 border-b border-zinc-500 rounded-bl-2xl">
           <div className="flex items-center gap-3 mb-2">
             <div className="bg-blue-200 text-blue-500 font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl">
-              {users.length > 0 ? users[0].name[0] : "?"}
+              {loading ? (
+                <span className="animate-pulse">...</span>
+              ) : users.length > 0 ? (
+                users[0].name[0]
+              ) : (
+                "?"
+              )}
             </div>
             <div>
               <div className="font-bold text-lg">
-                {users.length > 0 ? users[0].name : "Loading..."}
+                {loading
+                  ? <span className="animate-pulse">Loading...</span>
+                  : users.length > 0
+                  ? users[0].name
+                  : "No user"}
               </div>
               <div className=" text-sm">
-                {users.length > 0 ? users[0].email : ""}
+                {loading
+                  ? ""
+                  : users.length > 0
+                  ? users[0].email
+                  : ""}
               </div>
             </div>
           </div>
@@ -124,7 +139,7 @@ const Sidebar = () => {
             }}
             disabled={loading}
           >
-            {loading && (
+            {loading ? (
               <span className="flex items-center">
                 <svg
                   className="animate-spin h-5 w-5 mr-2 text-white"
@@ -147,51 +162,54 @@ const Sidebar = () => {
                 </svg>
                 <span className="text-white">Logging out...</span>
               </span>
+            ) : (
+              "Log out"
             )}
-            {!loading && "Log out"}
           </button>
         </div>
         <nav className="flex flex-col gap-1 px-2 py-4">
-          <Link
-            href={users.length > 0 ? `/dashboard/${users[0].id}` : "/dashboard"}
-            className={linkClasses(
-              users.length > 0 ? `/dashboard/${users[0].id}` : "/dashboard"
-            )}
-            onClick={() => setOpen(false)}
-          >
-            Dashboard
-          </Link>
-          <Link
-            href={users.length > 0 ? `/dashboard/task/${users[0].id}` : "/task"}
-            className={linkClasses(
-              users.length > 0 ? `/dashboard/task/${users[0].id}` : "/task"
-            )}
-            onClick={() => setOpen(false)}
-          >
-            Basic Task
-          </Link>
-          <Link
-            href={
-              users.length > 0 ? `/dashboard/reward/${users[0].id}` : "/reward"
-            }
-            className={linkClasses(
-              users.length > 0 ? `/dashboard/reward/${users[0].id}` : "/reward"
-            )}
-            onClick={() => setOpen(false)}
-          >
-            Reward Center
-          </Link>
-          <Link
-            href={
-              users.length > 0 ? `/dashboard/family/${users[0].id}` : "/family"
-            }
-            className={linkClasses(
-              users.length > 0 ? `/dashboard/family/${users[0].id}` : "/family"
-            )}
-            onClick={() => setOpen(false)}
-          >
-            Family Management
-          </Link>
+          {loading ? (
+            // Skeletons for nav links
+            <>
+              <div className="h-10 bg-zinc-100 rounded-lg animate-pulse my-1" />
+              <div className="h-10 bg-zinc-100 rounded-lg animate-pulse my-1" />
+              <div className="h-10 bg-zinc-100 rounded-lg animate-pulse my-1" />
+              <div className="h-10 bg-zinc-100 rounded-lg animate-pulse my-1" />
+            </>
+          ) : users.length > 0 ? (
+            <>
+              <Link
+                href={`/dashboard/${users[0].id}`}
+                className={linkClasses(`/dashboard/${users[0].id}`)}
+                onClick={() => setOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Link
+                href={`/dashboard/task/${users[0].id}`}
+                className={linkClasses(`/dashboard/task/${users[0].id}`)}
+                onClick={() => setOpen(false)}
+              >
+                Basic Task
+              </Link>
+              <Link
+                href={`/dashboard/reward/${users[0].id}`}
+                className={linkClasses(`/dashboard/reward/${users[0].id}`)}
+                onClick={() => setOpen(false)}
+              >
+                Reward Center
+              </Link>
+              <Link
+                href={`/dashboard/family/${users[0].id}`}
+                className={linkClasses(`/dashboard/family/${users[0].id}`)}
+                onClick={() => setOpen(false)}
+              >
+                Family Management
+              </Link>
+            </>
+          ) : (
+            <div className="text-zinc-400 px-5 py-3">No user data</div>
+          )}
           <button
             onClick={toggleDark}
             style={{
@@ -200,7 +218,7 @@ const Sidebar = () => {
               right: 16,
               zIndex: 100,
               background: dark ? "#7c3aed" : "#a5b4fc",
-              color: dark ? "#f4f4f5" : "#23232b",    
+              color: dark ? "#f4f4f5" : "#23232b",
               border: "none",
               borderRadius: "50%",
               width: 40,

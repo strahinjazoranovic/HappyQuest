@@ -39,9 +39,6 @@ const Navbar = () => {
           </h1>
         </Link>
         <div className="flex">
-          <Link href="/login" className="text-right text-2xl ml-10 mr-10">
-            <button className="btn bg-blue-300 border-none">Login</button>
-          </Link>
           <button
             onClick={toggleDark}
             style={{
