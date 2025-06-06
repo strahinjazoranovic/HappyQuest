@@ -6,9 +6,9 @@ export default function Home() {
       <NavBar />
       <section className="flex flex-col items-center justify-center py-24 px-4">
         <h1 className="text-3xl sm:text-6xl font-extrabold mb-6 text-center">
-          Welcome to HappyQuest!
+          Welcome to <span className="text-blue-300">Happy</span>Quest!
         </h1>
-        <p className="text-lg sm:text-2xl mb-8 text-center max-w-2xl">
+        <p className="text-lg sm:text-2xl m-5 text-center max-w-2xl">
           Empower your family to build healthy habits, celebrate achievements,
           and grow together. Track progress, reward positive actions, and make
           every day a HappyQuest!

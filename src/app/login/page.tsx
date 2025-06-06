@@ -1,8 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import NavBar from "../ui/navbar";
-
 
 export default function LoginPage() {
   const router = useRouter();
@@ -39,11 +37,38 @@ export default function LoginPage() {
     }
   };
 
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      setDark(true);
+    }
+  }, []);
+
+  const toggleDark = () => {
+    if (dark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
+      setDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+      setDark(true);
+    }
+  };
+
   return (
     <>
-      <NavBar />
       <div className="flex items-center justify-center min-h-screen">
         <div className="p-6 rounded-2xl shadow-2xl w-84 md:w-128">
+          <h1 className="text-2xl sm:text-4xl font-extrabold mb-6 text-center">
+            Log into <span className="text-blue-300">Happy</span>Quest
+          </h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium">
@@ -52,7 +77,7 @@ export default function LoginPage() {
               <input
                 type="email"
                 id="email"
-                className="mt-1 w-full px-4 py-2 border border-black rounded-xl"
+                className="mt-1 w-full px-4 py-2 border rounded"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -65,7 +90,7 @@ export default function LoginPage() {
               <input
                 type="password"
                 id="password"
-                className="mt-1 w-full px-4 py-2 border border-black rounded-xl"
+                className="mt-1 w-full px-4 py-2 border rounded"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -79,7 +104,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="btn w-full rounded-xl bg-blue-300 border-none flex items-center justify-center"
+              className="btn w-full bg-blue-300 border-none text-xl flex items-center justify-center"
               disabled={loading}
             >
               {loading && (
@@ -111,6 +136,26 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
+      <button
+        onClick={toggleDark}
+        style={{
+          position: "fixed",
+          top: 16,
+          right: 16,
+          zIndex: 100,
+          background: dark ? "#7c3aed" : "#a5b4fc",
+          color: dark ? "#f4f4f5" : "#23232b",
+          border: "none",
+          borderRadius: "50%",
+          width: 40,
+          height: 40,
+          fontSize: 20,
+          cursor: "pointer",
+        }}
+        aria-label="Toggle dark mode"
+      >
+        {dark ? "🌞" : "🌙"}
+      </button>
     </>
   );
 }
