@@ -1,4 +1,7 @@
-![HappyQuest landing page](/public/landingPage.png)
+<a href="https://github.com/strahinjazoranovic/HappyQuest">
+ <img width="1024" alt="HappyQuest" src="public/landingPage.png">
+</a>
+
 
 A task and reward application designed for parents and children to foster positive habits and engagement.
 
