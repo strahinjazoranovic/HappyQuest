@@ -149,8 +149,8 @@ HappyQuest/
 - **[Repository](https://github.com/strahinjazoranovic/HappyQuest)**
 - **[Live demo](https://github.com/strahinjazoranovic/HappyQuest), coming soon** 
 
-### Want more information about this project?
+## Want more information about this project?
 
-Head to my [portfolio](https://portfolio-topaz-xi-84.vercel.app/projects/happyquest) for more information about HappyQuest and its development process
+Head to my [portfolio](https://portfolio-topaz-xi-84.vercel.app/projects/happyquest) for more information about HappyQuest and its development process.
 
 Developed by [strahinjazoranovic](https://github.com/strahinjazoranovic).
