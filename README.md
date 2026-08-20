@@ -144,8 +144,6 @@ HappyQuest/
 * `src/app/ui/` — Shared UI components and global styles.
 * `public/` — Static images and logos used throughout the application.
 
-## Want more information about this project?
-
-Head to my [portfolio](https://portfolio-topaz-xi-84.vercel.app/projects/happyquest) for more information about HappyQuest and its development process.
+## Developer
 
 Developed by [strahinjazoranovic](https://github.com/strahinjazoranovic).
